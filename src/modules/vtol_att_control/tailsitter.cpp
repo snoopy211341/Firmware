@@ -247,20 +247,13 @@ void Tailsitter::update_transition_state()
 		}
 	}
 
-	_v_att_sp->thrust_body[2] = _mc_virtual_att_sp->thrust_body[2];
-
 	_mc_roll_weight = 1.0f;
 	_mc_pitch_weight = 1.0f;
 	_mc_yaw_weight = 1.0f;
 
 	_v_att_sp->timestamp = hrt_absolute_time();
-
-	const Eulerf euler_sp(_q_trans_sp);
-	_v_att_sp->roll_body = euler_sp.phi();
-	_v_att_sp->pitch_body = euler_sp.theta();
-	_v_att_sp->yaw_body = euler_sp.psi();
-
 	_q_trans_sp.copyTo(_v_att_sp->q_d);
+	_v_att_sp->thrust_body[2] = _mc_virtual_att_sp->thrust_body[2];
 }
 
 void Tailsitter::waiting_on_tecs()
